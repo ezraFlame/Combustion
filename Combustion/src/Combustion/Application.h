@@ -3,8 +3,7 @@
 #include "Core.h"
 
 namespace Combustion {
-	class CB_API Application
-	{
+	class CB_API Application {
 	public:
 		Application();
 		virtual ~Application();

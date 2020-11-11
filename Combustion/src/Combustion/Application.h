@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Events/Event.h"
 
 namespace Combustion {
 	class CB_API Application {

@@ -10,7 +10,6 @@ int main(int argc, char** argv) {
 	int a = 5;
 	CB_INFO("Hello! Here's the thing you asked for: {0}", a);
 
-	printf("Starting Combustion!!");
 	auto app = Combustion::CreateApplication();
 	app->Run();
 	delete app;

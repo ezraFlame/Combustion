@@ -17,7 +17,7 @@ namespace Combustion {
 
 	class CB_API KeyPressedEvent : public KeyEvent {
 	public:
-		KeyPressedEvent(int keycode, int repeateCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) {
+		KeyPressedEvent(int keycode, int repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount) {
 
 		}
 
@@ -42,7 +42,7 @@ namespace Combustion {
 
 		std::string ToString() const override {
 			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << m_KeyCode << ;
+			ss << "KeyReleasedEvent: " << m_KeyCode;
 			return ss.str();
 		}
 

@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Combustion {
 	class CB_API MouseMovedEvent : public Event {
 	public:

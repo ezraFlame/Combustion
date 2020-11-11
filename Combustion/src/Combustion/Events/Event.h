@@ -1,9 +1,7 @@
 #pragma once
+#include "cbpch.h"
 
 #include "Combustion/Core.h"
-
-#include <string>
-#include <functional>
 
 namespace Combustion {
 	enum class EventType {

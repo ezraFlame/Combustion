@@ -34,6 +34,7 @@
     <ClInclude Include="src\Combustion\Log.h">
       <Filter>Combustion</Filter>
     </ClInclude>
+    <ClInclude Include="src\cbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">
@@ -42,5 +43,6 @@
     <ClCompile Include="src\Combustion\Log.cpp">
       <Filter>Combustion</Filter>
     </ClCompile>
+    <ClCompile Include="src\cbpch.cpp" />
   </ItemGroup>
 </Project>

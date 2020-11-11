@@ -1,8 +1,7 @@
 #pragma once
+#include "cbpch.h"
 
 #include "Event.h"
-
-#include <sstream>
 
 namespace Combustion {
 	class CB_API WindowResizedEvent : public Event {

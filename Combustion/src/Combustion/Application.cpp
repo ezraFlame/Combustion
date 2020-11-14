@@ -8,6 +8,7 @@
 namespace Combustion {
 	Application::Application()
 	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -15,9 +16,8 @@ namespace Combustion {
 	}
 
 	void Application::Run() {
-		WindowResizedEvent e(1280, 720);
-		CB_INFO(e.ToString());
-
-		while (true);
+		while (m_Running) {
+			m_Window->OnUpdate();
+		}
 	}
 }

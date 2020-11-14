@@ -7,6 +7,12 @@
     <Filter Include="Combustion\Events">
       <UniqueIdentifier>{CCD31A91-38EA-1827-8161-A448EDB6E9AE}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Combustion.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\Combustion\Log.h">
       <Filter>Combustion</Filter>
     </ClInclude>
+    <ClInclude Include="src\Combustion\Window.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\cbpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\Combustion\Log.cpp">
       <Filter>Combustion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cbpch.cpp" />
   </ItemGroup>

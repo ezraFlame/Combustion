@@ -10,6 +10,11 @@ workspace "Combustion"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "Combustion/vendor/GLFW/include"
+
+include "Combustion/vendor/GLFW"
+
 project "Combustion"
 	location "Combustion"
 	kind "SharedLib"
@@ -28,7 +33,13 @@ project "Combustion"
 
 	includedirs {
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links {
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -47,7 +58,7 @@ project "Combustion"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		symbols "On"
+		symbols "On" 
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"

@@ -12,6 +12,8 @@
 #include <unordered_set>
 #include <sstream>
 
+#include "Combustion/Log.h"
+
 #ifdef CB_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

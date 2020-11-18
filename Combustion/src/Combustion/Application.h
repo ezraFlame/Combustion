@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
 
 #include "Window.h"
+#include "Combustion/LayerStack.h"
+#include "Combustion/Events/Event.h"
+#include "Combustion/Events/ApplicationEvent.h"
 
 namespace Combustion {
 	class CB_API Application {
@@ -14,6 +15,8 @@ namespace Combustion {
 		void Run();
 
 		void OnEvent(Event& e);
+
+		void PushLayer(Layer* layer);
 	private:
 		bool OnWindowClose(WindowClosedEvent& e);
 

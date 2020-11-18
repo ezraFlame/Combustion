@@ -149,6 +149,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Layer.h" />
+    <ClInclude Include="LayerStack.h" />
     <ClInclude Include="src\Combustion.h" />
     <ClInclude Include="src\Combustion\Application.h" />
     <ClInclude Include="src\Combustion\Core.h" />
@@ -163,6 +165,8 @@
     <ClInclude Include="src\cbpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Application.cpp" />
     <ClCompile Include="src\Combustion\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />

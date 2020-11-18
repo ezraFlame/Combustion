@@ -37,6 +37,12 @@
     <ClInclude Include="src\Combustion\Events\MouseEvent.h">
       <Filter>Combustion\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Combustion\Layer.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Combustion\LayerStack.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
     <ClInclude Include="src\Combustion\Log.h">
       <Filter>Combustion</Filter>
     </ClInclude>
@@ -47,15 +53,15 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\cbpch.h" />
-    <ClInclude Include="Layer.h">
-      <Filter>Combustion</Filter>
-    </ClInclude>
-    <ClInclude Include="LayerStack.h">
-      <Filter>Combustion</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">
+      <Filter>Combustion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Combustion\Layer.cpp">
+      <Filter>Combustion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Combustion\LayerStack.cpp">
       <Filter>Combustion</Filter>
     </ClCompile>
     <ClCompile Include="src\Combustion\Log.cpp">
@@ -65,11 +71,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cbpch.cpp" />
-    <ClCompile Include="Layer.cpp">
-      <Filter>Combustion</Filter>
-    </ClCompile>
-    <ClCompile Include="LayerStack.cpp">
-      <Filter>Combustion</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -78,7 +78,7 @@ namespace Combustion {
 		}
 		std::string ToString() const override {
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << m_Button;
+			ss << "MouseButtonReleasedEvent: " << m_Button;
 			return ss.str();
 		}
 

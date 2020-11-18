@@ -25,7 +25,7 @@ namespace Combustion {
 #define CB_CORE_ERROR(...) ::Combustion::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define CB_CORE_FATAL(...) ::Combustion::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
-//Core log macros
+//Client log macros
 #define CB_TRACE(...) ::Combustion::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define CB_INFO(...) ::Combustion::Log::GetClientLogger()->info(__VA_ARGS__)
 #define CB_WARN(...) ::Combustion::Log::GetClientLogger()->warn(__VA_ARGS__)

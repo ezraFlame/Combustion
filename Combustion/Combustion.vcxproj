@@ -83,7 +83,7 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -149,8 +149,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Layer.h" />
-    <ClInclude Include="LayerStack.h" />
     <ClInclude Include="src\Combustion.h" />
     <ClInclude Include="src\Combustion\Application.h" />
     <ClInclude Include="src\Combustion\Core.h" />
@@ -159,15 +157,17 @@
     <ClInclude Include="src\Combustion\Events\Event.h" />
     <ClInclude Include="src\Combustion\Events\KeyEvent.h" />
     <ClInclude Include="src\Combustion\Events\MouseEvent.h" />
+    <ClInclude Include="src\Combustion\Layer.h" />
+    <ClInclude Include="src\Combustion\LayerStack.h" />
     <ClInclude Include="src\Combustion\Log.h" />
     <ClInclude Include="src\Combustion\Window.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cbpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Layer.cpp" />
-    <ClCompile Include="LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Application.cpp" />
+    <ClCompile Include="src\Combustion\Layer.cpp" />
+    <ClCompile Include="src\Combustion\LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Log.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cbpch.cpp">

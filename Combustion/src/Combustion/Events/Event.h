@@ -31,7 +31,7 @@ virtual const char* GetName() const override { return #type; }
 
 
 	class CB_API Event {
-		friend class EventDisptcher;
+		friend class EventDispatcher;
 	public:
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -56,7 +56,7 @@ virtual const char* GetName() const override { return #type; }
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func) {
-			if (m_Event.GetEventType() == T::GetSTaticType()) {
+			if (m_Event.GetEventType() == T::GetStaticType()) {
 				m_Event.m_Handled = func(*(T*)&m_Event);
 				return true;
 			}

@@ -4,3 +4,6 @@
 [submodule "Combustion/vendor/glfw"]
 	path = Combustion/vendor/glfw
 	url = https://github.com/ezraFlame/glfw
+[submodule "Combustion/vendor/imgui"]
+	path = Combustion/vendor/imgui
+	url = https://github.com/ezraFlame/imgui

@@ -18,6 +18,10 @@ namespace Combustion {
 
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		static inline Application& Get() { return *s_Instance; }
+
+		inline Window& GetWindow() { return *m_Window; }
 	private:
 		bool OnWindowClose(WindowClosedEvent& e);
 
@@ -25,6 +29,8 @@ namespace Combustion {
 		bool m_Running = true;
 
 		LayerStack m_LayerStack;
+
+		static Application* s_Instance;
 	};
 
 	//to be defined in CLIENT

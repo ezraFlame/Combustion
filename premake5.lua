@@ -12,8 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Combustion/vendor/GLFW/include"
+IncludeDir["Glad"] = "Combustion/vendor/Glad/include"
+IncludeDir["ImGui"] = "Combustion/vendor/imgui"
 
 include "Combustion/vendor/GLFW"
+include "Combustion/vendor/Glad"
+include "Combustion/vendor/imgui"
 
 project "Combustion"
 	location "Combustion"
@@ -34,11 +38,15 @@ project "Combustion"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links {
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -49,7 +57,8 @@ project "Combustion"
 
 		defines {
 			"CB_PLATFORM_WINDOWS",
-			"CB_BUILD_DLL"
+			"CB_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands {

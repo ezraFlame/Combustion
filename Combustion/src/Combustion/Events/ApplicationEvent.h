@@ -51,7 +51,7 @@ namespace Combustion {
 
 		}
 
-		EVENT_CLASS_TYPE(AppTick)
+		EVENT_CLASS_TYPE(AppUpdate)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
@@ -61,7 +61,7 @@ namespace Combustion {
 
 		}
 
-		EVENT_CLASS_TYPE(AppTick)
+		EVENT_CLASS_TYPE(AppRender)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 }

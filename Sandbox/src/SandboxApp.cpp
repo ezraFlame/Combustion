@@ -11,7 +11,7 @@ public:
 	}
 
 	void OnEvent(Combustion::Event& event) override {
-		CB_INFO("{0}", event);
+		CB_TRACE("{0}", event);
 	}
 };
 
@@ -19,6 +19,7 @@ class Sandbox : public Combustion::Application {
 public:
 	Sandbox() {
 		PushLayer(new TestLayer());
+		PushOverlay(new Combustion::ImGuiLayer());
 	}
 
 	~Sandbox() {

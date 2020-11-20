@@ -1,0 +1,2 @@
+C:\Users\ezras\source\repos\Combustion\Combustion\vendor\Glad\bin\Debug-windows\Glad\Glad.pdb
+C:\Users\ezras\source\repos\Combustion\Combustion\vendor\Glad\bin-int\Debug-windows\Glad\Glad.pdb

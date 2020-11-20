@@ -158,11 +158,13 @@
     <ClInclude Include="src\Combustion\Events\KeyEvent.h" />
     <ClInclude Include="src\Combustion\Events\MouseEvent.h" />
     <ClInclude Include="src\Combustion\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Combustion\Input.h" />
     <ClInclude Include="src\Combustion\Layer.h" />
     <ClInclude Include="src\Combustion\LayerStack.h" />
     <ClInclude Include="src\Combustion\Log.h" />
     <ClInclude Include="src\Combustion\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cbpch.h" />
   </ItemGroup>
@@ -173,6 +175,7 @@
     <ClCompile Include="src\Combustion\LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Log.cpp" />
     <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cbpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

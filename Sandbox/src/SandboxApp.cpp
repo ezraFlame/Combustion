@@ -11,7 +11,7 @@ public:
 	}
 
 	void OnEvent(Combustion::Event& event) override {
-		CB_TRACE("{0}", event);
+		//CB_TRACE("{0}", event);
 	}
 };
 
@@ -27,6 +27,12 @@ public:
 	}
 };
 
+class TestGui : public Combustion::Layer {
+public:
+	TestGui() : Layer("Gui") {
+
+	}
+};
 
 Combustion::Application* Combustion::CreateApplication() {
 	return new Sandbox();

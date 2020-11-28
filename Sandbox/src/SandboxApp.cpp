@@ -8,6 +8,10 @@ public:
 
 	void OnUpdate() override {
 		//CB_INFO("TestLayer::OnUpdate()");
+
+		if (Combustion::Input::IsKeyPressed(CB_KEY_TAB)) {
+			CB_INFO("Tab key is pressed!");
+		}
 	}
 
 	void OnEvent(Combustion::Event& event) override {

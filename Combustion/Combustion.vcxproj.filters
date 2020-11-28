@@ -67,6 +67,8 @@
     <ClInclude Include="src\cbpch.h" />
     <ClInclude Include="src\Combustion\Input.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Combustion\KeyCodes.h" />
+    <ClInclude Include="src\Combustion\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">

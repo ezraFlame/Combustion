@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Combustion/vendor/GLFW/include"
 IncludeDir["Glad"] = "Combustion/vendor/Glad/include"
 IncludeDir["ImGui"] = "Combustion/vendor/imgui"
+IncludeDir["glm"] = "Combustion/vendor/glm"
 
 include "Combustion/vendor/GLFW"
 include "Combustion/vendor/Glad"
@@ -32,7 +33,9 @@ project "Combustion"
 
 	files {
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/glm/glm/**.hpp",
+		"%{prj.name}/glm/glm/**.inl"
 	}
 
 	includedirs {
@@ -40,7 +43,8 @@ project "Combustion"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links {
@@ -92,11 +96,14 @@ project "Sandbox"
 
 	includedirs {
 		"Combustion/vendor/spdlog/include",
-		"Combustion/src"
+		"Combustion/src",
+		"Combustion/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links {
-		"Combustion"
+		"Combustion",
+		"imgui"
 	}
 
 	filter "system:windows"

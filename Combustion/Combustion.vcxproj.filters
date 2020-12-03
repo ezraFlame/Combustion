@@ -13,9 +13,6 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
@@ -46,6 +43,12 @@
     <ClInclude Include="src\Combustion\ImGui\ImGuiLayer.h">
       <Filter>Combustion\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Combustion\Input.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Combustion\KeyCodes.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
     <ClInclude Include="src\Combustion\Layer.h">
       <Filter>Combustion</Filter>
     </ClInclude>
@@ -55,24 +58,26 @@
     <ClInclude Include="src\Combustion\Log.h">
       <Filter>Combustion</Filter>
     </ClInclude>
+    <ClInclude Include="src\Combustion\MouseButtonCodes.h">
+      <Filter>Combustion</Filter>
+    </ClInclude>
     <ClInclude Include="src\Combustion\Window.h">
       <Filter>Combustion</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3.h">
-      <Filter>Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\cbpch.h" />
-    <ClInclude Include="src\Combustion\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Combustion\KeyCodes.h" />
-    <ClInclude Include="src\Combustion\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">
       <Filter>Combustion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Combustion\ImGui\ImGuiBuild.cpp">
+      <Filter>Combustion\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\Combustion\ImGui\ImGuiLayer.cpp">
       <Filter>Combustion\ImGui</Filter>
@@ -86,13 +91,12 @@
     <ClCompile Include="src\Combustion\Log.cpp">
       <Filter>Combustion</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\imgui_impl_opengl3.cpp">
-      <Filter>Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\cbpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ namespace Combustion {
 
 	private:
 		bool OnWindowClose(WindowClosedEvent& e);
-
+		
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;

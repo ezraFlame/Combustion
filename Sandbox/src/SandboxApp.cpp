@@ -1,6 +1,5 @@
 #include <Combustion.h>
-
-using namespace Combustion;
+#include "imgui/imgui.h"
 
 class TestLayer : public Combustion::Layer {
 public:
@@ -20,9 +19,6 @@ public:
 	}
 
 	virtual void OnImGuiRender() override {
-		Application& app = Application::Get();
-		ImGui::SetCurrentContext(app.GetImGuiContext());
-
 		ImGui::Begin("Test");
 		ImGui::Text("Hello from Combustion!");
 		ImGui::End();

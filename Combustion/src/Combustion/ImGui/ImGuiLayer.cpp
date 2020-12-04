@@ -24,10 +24,7 @@ namespace Combustion {
 	void ImGuiLayer::OnAttach() {
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
-		ImGuiContext* context = ImGui::CreateContext();
-		Application& app = Application::Get();
-		app.SetImGuiContext(context);
-
+		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -48,6 +45,7 @@ namespace Combustion {
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
+		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
 		// Setup Platform/Renderer backends

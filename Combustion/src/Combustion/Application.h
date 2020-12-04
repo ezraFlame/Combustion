@@ -7,7 +7,6 @@
 #include "Combustion/Events/Event.h"
 #include "Combustion/Events/ApplicationEvent.h"]
 #include "Combustion/ImGui/ImGuiLayer.h"
-#include "imgui.h"
 
 namespace Combustion {
 	class CB_API Application {
@@ -24,8 +23,6 @@ namespace Combustion {
 		static inline Application& Get() { return *s_Instance; }
 
 		inline Window& GetWindow() { return *m_Window; }
-		ImGuiContext* GetImGuiContext() { return m_ImGuiContext; }
-		void SetImGuiContext(ImGuiContext* context) { m_ImGuiContext = context; }
 
 	private:
 		bool OnWindowClose(WindowClosedEvent& e);
@@ -37,7 +34,6 @@ namespace Combustion {
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
-		 ImGuiContext* m_ImGuiContext;
 	};
 
 	//to be defined in CLIENT

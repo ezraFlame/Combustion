@@ -17,13 +17,15 @@ IncludeDir["ImGui"] = "Combustion/vendor/imgui"
 IncludeDir["glm"] = "Combustion/vendor/glm"
 
 include "Combustion/vendor/GLFW"
-include "Combustion/vendor/Glad"
+include "Combustion/vendor/Glad" 
 include "Combustion/vendor/imgui"
 
 project "Combustion"
 	location "Combustion"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "c++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -54,37 +56,39 @@ project "Combustion"
 		"opengl32.lib"
 	}
 
+	defines {
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "Off"
 		systemversion "latest"
 
 		defines {
 			"CB_PLATFORM_WINDOWS",
-			"CB_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands {
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		symbols "On" 
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "c++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -102,13 +106,10 @@ project "Sandbox"
 	}
 
 	links {
-		"Combustion",
-		"imgui"
+		"Combustion"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "Off"
 		systemversion "latest"
 
 		defines {
@@ -117,12 +118,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
-		optimize "On"
+		runtime "Release"
+		optimize "on"

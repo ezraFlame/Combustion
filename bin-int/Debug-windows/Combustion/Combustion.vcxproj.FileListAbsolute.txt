@@ -1,0 +1,2 @@
+C:\Users\ezras\source\repos\Combustion\bin\Debug-windows\Combustion\Combustion.pdb
+C:\Users\ezras\source\repos\Combustion\bin-int\Debug-windows\Combustion\Combustion.pdb

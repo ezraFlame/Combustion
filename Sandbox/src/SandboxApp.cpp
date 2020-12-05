@@ -1,10 +1,14 @@
 #include <Combustion.h>
 #include "imgui/imgui.h"
 
+using namespace Combustion;
+
 class TestLayer : public Combustion::Layer {
 public:
 	TestLayer() : Layer("Test") {
 	}
+
+	bool showChild = false;
 
 	void OnUpdate() override {
 		//CB_INFO("TestLayer::OnUpdate()");
@@ -19,6 +23,18 @@ public:
 	}
 
 	virtual void OnImGuiRender() override {
+		ImGui::BeginMainMenuBar();
+		ImGui::MenuItem("This is a button");
+		ImGui::EndMainMenuBar();
+		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+		ImGui::Begin("Dock");
+		ImGui::Checkbox("Child?", &showChild);
+		if (showChild) {
+			ImGui::BeginChild("test");
+			ImGui::Text("Hello, world!");
+			ImGui::EndChild();
+		}
+		ImGui::End();
 		ImGui::Begin("Test");
 		ImGui::Text("Hello from Combustion!");
 		ImGui::End();

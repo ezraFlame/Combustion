@@ -5,7 +5,7 @@
 #include "Window.h"
 #include "Combustion/LayerStack.h"
 #include "Combustion/Events/Event.h"
-#include "Combustion/Events/ApplicationEvent.h"]
+#include "Combustion/Events/ApplicationEvent.h"
 #include "Combustion/ImGui/ImGuiLayer.h"
 
 namespace Combustion {

@@ -73,6 +73,9 @@
     <ClInclude Include="src\cbpch.h" />
     <ClInclude Include="src\Combustion\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Combustion\Renderer\Shader.h" />
+    <ClInclude Include="src\Combustion\Renderer\Buffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">
@@ -101,5 +104,7 @@
     </ClCompile>
     <ClCompile Include="src\cbpch.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Combustion\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Combustion\Renderer\Buffer.cpp" />
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 #include "Combustion/Events/Event.h"
 #include "Combustion/Events/ApplicationEvent.h"
 #include "Combustion/ImGui/ImGuiLayer.h"
+#include "Combustion/Renderer/Shader.h"
 
 namespace Combustion {
 	class CB_API Application {
@@ -32,6 +33,10 @@ namespace Combustion {
 		bool m_Running = true;
 
 		LayerStack m_LayerStack;
+
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};

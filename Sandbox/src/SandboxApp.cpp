@@ -23,21 +23,7 @@ public:
 	}
 
 	virtual void OnImGuiRender() override {
-		ImGui::BeginMainMenuBar();
-		ImGui::MenuItem("This is a button");
-		ImGui::EndMainMenuBar();
-		ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-		ImGui::Begin("Dock");
-		ImGui::Checkbox("Child?", &showChild);
-		if (showChild) {
-			ImGui::BeginChild("test");
-			ImGui::Text("Hello, world!");
-			ImGui::EndChild();
-		}
-		ImGui::End();
-		ImGui::Begin("Test");
-		ImGui::Text("Hello from Combustion!");
-		ImGui::End();
+
 	}
 };
 

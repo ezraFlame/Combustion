@@ -5,7 +5,7 @@
 #include "Combustion/Events/KeyEvent.h"
 #include "Combustion/Events/MouseEvent.h"
 
-#include <glad/glad.h>
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace Combustion {
 	static bool s_GLFWInitialized = false;
@@ -31,6 +31,7 @@ namespace Combustion {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
+
 		CB_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (!s_GLFWInitialized) {
@@ -41,11 +42,9 @@ namespace Combustion {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
+		m_Context = new OpenGLContext(m_Window); 
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-		CB_CORE_ASSERT(status, "Failed to initilize Glad!");
+		m_Context->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -139,7 +138,7 @@ namespace Combustion {
 
 	void WindowsWindow::OnUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {

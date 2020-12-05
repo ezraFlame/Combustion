@@ -155,7 +155,9 @@
     <ClInclude Include="src\Combustion\LayerStack.h" />
     <ClInclude Include="src\Combustion\Log.h" />
     <ClInclude Include="src\Combustion\MouseButtonCodes.h" />
+    <ClInclude Include="src\Combustion\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Combustion\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\cbpch.h" />
@@ -167,6 +169,7 @@
     <ClCompile Include="src\Combustion\Layer.cpp" />
     <ClCompile Include="src\Combustion\LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\cbpch.cpp">

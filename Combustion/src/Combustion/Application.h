@@ -4,10 +4,15 @@
 
 #include "Window.h"
 #include "Combustion/LayerStack.h"
+
 #include "Combustion/Events/Event.h"
 #include "Combustion/Events/ApplicationEvent.h"
+
 #include "Combustion/ImGui/ImGuiLayer.h"
+
 #include "Combustion/Renderer/Shader.h"
+
+#include "Combustion/Renderer/Buffer.h"
 
 namespace Combustion {
 	class CB_API Application {
@@ -34,9 +39,13 @@ namespace Combustion {
 
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		unsigned int m_VertexArray;
 
 		std::unique_ptr<Shader> m_Shader;
+
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 
 		static Application* s_Instance;
 	};

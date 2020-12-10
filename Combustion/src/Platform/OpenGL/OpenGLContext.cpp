@@ -3,7 +3,7 @@
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-#include <gl/GL.h>
+#include <glad/glad.h>
 
 namespace Combustion {
 	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle) {

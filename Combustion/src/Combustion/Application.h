@@ -13,6 +13,7 @@
 #include "Combustion/Renderer/Shader.h"
 
 #include "Combustion/Renderer/Buffer.h"
+#include "Combustion/Renderer/VertexArray.h"
 
 namespace Combustion {
 	class CB_API Application {
@@ -39,13 +40,11 @@ namespace Combustion {
 
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
 
-		std::unique_ptr<Shader> m_Shader;
-
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 
 		static Application* s_Instance;
 	};

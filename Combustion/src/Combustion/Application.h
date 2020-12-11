@@ -15,6 +15,8 @@
 #include "Combustion/Renderer/Buffer.h"
 #include "Combustion/Renderer/VertexArray.h"
 
+#include "Combustion/Renderer/OrthographicCamera.h"
+
 namespace Combustion {
 	class CB_API Application {
 	public:
@@ -45,6 +47,8 @@ namespace Combustion {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 		static Application* s_Instance;
 	};

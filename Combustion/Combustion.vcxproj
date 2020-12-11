@@ -157,6 +157,7 @@
     <ClInclude Include="src\Combustion\MouseButtonCodes.h" />
     <ClInclude Include="src\Combustion\Renderer\Buffer.h" />
     <ClInclude Include="src\Combustion\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Combustion\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Combustion\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Combustion\Renderer\Renderer.h" />
     <ClInclude Include="src\Combustion\Renderer\RendererAPI.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="src\Combustion\LayerStack.cpp" />
     <ClCompile Include="src\Combustion\Log.cpp" />
     <ClCompile Include="src\Combustion\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Combustion\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Combustion\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Combustion\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Combustion\Renderer\RendererAPI.cpp" />

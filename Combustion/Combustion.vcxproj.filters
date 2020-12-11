@@ -83,6 +83,7 @@
     <ClInclude Include="src\Combustion\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Combustion\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Combustion\Renderer\OrthographicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Combustion\Application.cpp">
@@ -121,5 +122,6 @@
     <ClCompile Include="src\Combustion\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Combustion\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Combustion\Renderer\OrthographicCamera.cpp" />
   </ItemGroup>
 </Project>

@@ -143,6 +143,7 @@
     <ClInclude Include="src\Combustion.h" />
     <ClInclude Include="src\Combustion\Application.h" />
     <ClInclude Include="src\Combustion\Core.h" />
+    <ClInclude Include="src\Combustion\Core\Timestep.h" />
     <ClInclude Include="src\Combustion\EntryPoint.h" />
     <ClInclude Include="src\Combustion\Events\ApplicationEvent.h" />
     <ClInclude Include="src\Combustion\Events\Event.h" />

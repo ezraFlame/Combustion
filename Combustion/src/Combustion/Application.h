@@ -8,7 +8,9 @@
 #include "Combustion/Events/Event.h"
 #include "Combustion/Events/ApplicationEvent.h"
 
-#include "Combustion/ImGui/ImGuiLayer.h"
+#include "ImGui/ImGuiLayer.h"
+
+#include "Combustion/Core/Timestep.h"
 
 #include "Combustion/Renderer/OrthographicCamera.h"
 
@@ -34,10 +36,10 @@ namespace Combustion {
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
-
 		LayerStack m_LayerStack;
-
 		static Application* s_Instance;
+
+		float m_LastFrameTime = 0.0f;
 	};
 
 	//to be defined in CLIENT

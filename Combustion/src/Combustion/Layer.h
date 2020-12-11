@@ -2,6 +2,7 @@
 
 #include "Combustion/Core.h"
 #include "Combustion/Events/Event.h"
+#include "Combustion/Core/Timestep.h"
 
 namespace Combustion {
 	class CB_API Layer {
@@ -12,7 +13,7 @@ namespace Combustion {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

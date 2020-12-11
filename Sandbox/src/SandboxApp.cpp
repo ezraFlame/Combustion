@@ -121,26 +121,32 @@ public:
 
 	bool showChild = false;
 
-	void OnUpdate() override {
+	void OnUpdate(Combustion::Timestep ts) override {
+		//CB_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
+
 		if (m_GoodMovement) {
 			if (Combustion::Input::IsKeyPressed(CB_KEY_W)) {
-				m_CameraPosition.y += m_CameraMoveSpeed;
+				m_CameraPosition.y += m_CameraMoveSpeed * ts;
 			}
 			else if (Combustion::Input::IsKeyPressed(CB_KEY_S)) {
-				m_CameraPosition.y -= m_CameraMoveSpeed;
+				m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 			}
 			if (Combustion::Input::IsKeyPressed(CB_KEY_D)) {
-				m_CameraPosition.x += m_CameraMoveSpeed;
+				m_CameraPosition.x += m_CameraMoveSpeed * ts;
 			}
 			else if (Combustion::Input::IsKeyPressed(CB_KEY_A)) {
-				m_CameraPosition.x -= m_CameraMoveSpeed;
+				m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 			}
 			if (Combustion::Input::IsKeyPressed(CB_KEY_Q)) {
-				m_CameraRotation -= m_CameraRotateSpeed;
+				m_CameraRotation -= m_CameraRotateSpeed * ts;
 			}
 			else if (Combustion::Input::IsKeyPressed(CB_KEY_E)) {
-				m_CameraRotation += m_CameraRotateSpeed;
+				m_CameraRotation += m_CameraRotateSpeed * ts;
 			}
+		}
+		else {
+			CB_ERROR("Non-smooth movement is not currently supported for this demo.");
+			m_GoodMovement = true;
 		}
 
 		Combustion::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -153,11 +159,6 @@ public:
 		Combustion::Renderer::Submit(m_BlueShader, m_SquareVA);
 		Combustion::Renderer::Submit(m_Shader, m_VertexArray);
 		Combustion::Renderer::EndScene();
-	}
-
-	void OnEvent(Combustion::Event& event) override {
-		Combustion::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<Combustion::KeyPressedEvent>(CB_BIND_EVENT_FN(TestLayer::OnKeyPressedEvent));
 	}
 
 	bool OnKeyPressedEvent(Combustion::KeyPressedEvent& event) {
@@ -190,8 +191,8 @@ public:
 	virtual void OnImGuiRender() override {
 		ImGui::Begin("Movement");
 		ImGui::Checkbox("Smooth Movement?", &m_GoodMovement);
-		ImGui::SliderFloat("Move Speed", &m_CameraMoveSpeed, 0.0f, 0.2f);
-		ImGui::SliderFloat("Rotate Speed", &m_CameraRotateSpeed, 0.0f, 10.0f);
+		ImGui::SliderFloat("Move Speed", &m_CameraMoveSpeed, 0.0f, 10.0f);
+		ImGui::SliderFloat("Rotate Speed", &m_CameraRotateSpeed, 0.0f, 50.0f);
 		ImGui::End();
 	}
 private:
@@ -203,11 +204,11 @@ private:
 
 	Combustion::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.1f;
+	float m_CameraMoveSpeed = 1.0f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotateSpeed = 2.0f;
+	float m_CameraRotateSpeed = 10.0f;
 
-	bool m_GoodMovement = false;
+	bool m_GoodMovement = true;
 };
 
 class Sandbox : public Combustion::Application {

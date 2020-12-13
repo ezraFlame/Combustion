@@ -1,6 +1,10 @@
 #include <Combustion.h>
+#include <Platform/OpenGL/OpenGLShader.h>
 #include "imgui/imgui.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <glm/gtc/type_ptr.hpp>
 
 class TestLayer : public Combustion::Layer {
 public:
@@ -13,7 +17,7 @@ public:
 			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
 
-		std::shared_ptr<Combustion::VertexBuffer> vertexBuffer;
+		Combustion::Ref<Combustion::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Combustion::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Combustion::BufferLayout layout = {
@@ -26,31 +30,32 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Combustion::IndexBuffer> indexBuffer;
+		Combustion::Ref<Combustion::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Combustion::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(Combustion::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			0.75f, -0.75f, 0.0f,
-			0.75f, 0.75f, 0.0f,
-			-0.75f, 0.75f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f, 0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Combustion::VertexBuffer> squareVB;
+		Combustion::Ref<Combustion::VertexBuffer> squareVB;
 		squareVB.reset(Combustion::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		Combustion::BufferLayout squareVBLayout = {
-			{ Combustion::ShaderDataType::Float3, "a_Position" }
+			{ Combustion::ShaderDataType::Float3, "a_Position" },
+			{ Combustion::ShaderDataType::Float2, "a_TexCoord" }
 		};
 
 		squareVB->SetLayout(squareVBLayout);
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Combustion::IndexBuffer> squareIB;
+		Combustion::Ref<Combustion::IndexBuffer> squareIB;
 		squareIB.reset(Combustion::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 
 		m_SquareVA->SetIndexBuffer(squareIB);
@@ -62,6 +67,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -69,7 +75,7 @@ public:
 			void main() {
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -89,64 +95,91 @@ public:
 
 		m_Shader.reset(Combustion::Shader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
-
-			out vec3 v_Position;
+			uniform mat4 u_Transform;
 
 			void main() {
-				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
-
-			in vec3 v_Position;
+			uniform vec3 u_Color;
 
 			void main() {
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
-		m_BlueShader.reset(Combustion::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColorShader.reset(Combustion::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main() {
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			uniform sampler2D u_Texture;
+
+			in vec2 v_TexCoord;
+
+			void main() {
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Combustion::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Combustion::Texture2D::Create("assets/textures/Arrow.png");
+
+		std::dynamic_pointer_cast<Combustion::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Combustion::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	bool showChild = false;
 
 	void OnUpdate(Combustion::Timestep ts) override {
-		//CB_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMilliseconds());
-
-		if (m_GoodMovement) {
-			if (Combustion::Input::IsKeyPressed(CB_KEY_W)) {
-				m_CameraPosition.y += m_CameraMoveSpeed * ts;
-			}
-			else if (Combustion::Input::IsKeyPressed(CB_KEY_S)) {
-				m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-			}
-			if (Combustion::Input::IsKeyPressed(CB_KEY_D)) {
-				m_CameraPosition.x += m_CameraMoveSpeed * ts;
-			}
-			else if (Combustion::Input::IsKeyPressed(CB_KEY_A)) {
-				m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-			}
-			if (Combustion::Input::IsKeyPressed(CB_KEY_Q)) {
-				m_CameraRotation -= m_CameraRotateSpeed * ts;
-			}
-			else if (Combustion::Input::IsKeyPressed(CB_KEY_E)) {
-				m_CameraRotation += m_CameraRotateSpeed * ts;
-			}
+		//Camera Movement
+		if (Combustion::Input::IsKeyPressed(CB_KEY_W)) {
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 		}
-		else {
-			CB_ERROR("Non-smooth movement is not currently supported for this demo.");
-			m_GoodMovement = true;
+		else if (Combustion::Input::IsKeyPressed(CB_KEY_S)) {
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+		}
+		if (Combustion::Input::IsKeyPressed(CB_KEY_D)) {
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
+		}
+		else if (Combustion::Input::IsKeyPressed(CB_KEY_A)) {
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		}
+		if (Combustion::Input::IsKeyPressed(CB_KEY_Q)) {
+			m_CameraRotation += m_CameraRotateSpeed * ts;
+		}
+		else if (Combustion::Input::IsKeyPressed(CB_KEY_E)) {
+			m_CameraRotation -= m_CameraRotateSpeed * ts;
 		}
 
 		Combustion::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -156,51 +189,54 @@ public:
 		m_Camera.SetRotation(m_CameraRotation);
 
 		Combustion::Renderer::BeginScene(m_Camera);
-		Combustion::Renderer::Submit(m_BlueShader, m_SquareVA);
-		Combustion::Renderer::Submit(m_Shader, m_VertexArray);
-		Combustion::Renderer::EndScene();
-	}
 
-	bool OnKeyPressedEvent(Combustion::KeyPressedEvent& event) {
-		if (!m_GoodMovement) {
-			switch (event.GetKeyCode()) {
-			case CB_KEY_W:
-				m_CameraPosition.y += m_CameraMoveSpeed;
-				break;
-			case CB_KEY_A:
-				m_CameraPosition.x -= m_CameraMoveSpeed;
-				break;
-			case CB_KEY_S:
-				m_CameraPosition.y -= m_CameraMoveSpeed;
-				break;
-			case CB_KEY_D:
-				m_CameraPosition.x += m_CameraMoveSpeed;
-				break;
-			case CB_KEY_Q:
-				m_CameraRotation -= m_CameraRotateSpeed;
-				break;
-			case CB_KEY_E:
-				m_CameraRotation += m_CameraRotateSpeed;
-				break;
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		std::dynamic_pointer_cast<Combustion::OpenGLShader>(m_FlatColorShader)->Bind();
+		std::dynamic_pointer_cast<Combustion::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+
+				Combustion::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
+		//Combustion::Renderer::Submit(m_Shader, m_VertexArray);
 
-		return false;
+		{
+			glm::mat4 transform = glm::scale(glm::mat4(1.0f), glm::vec3(1.5f));
+
+			m_Texture->Bind();
+			Combustion::Renderer::Submit(m_TextureShader, m_SquareVA, transform);
+		}
+
+		Combustion::Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override {
 		ImGui::Begin("Movement");
-		ImGui::Checkbox("Smooth Movement?", &m_GoodMovement);
 		ImGui::SliderFloat("Move Speed", &m_CameraMoveSpeed, 0.0f, 10.0f);
 		ImGui::SliderFloat("Rotate Speed", &m_CameraRotateSpeed, 0.0f, 50.0f);
 		ImGui::End();
+
+		ImGui::Begin("Rendering");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 private:
-	std::shared_ptr<Combustion::Shader> m_Shader;
-	std::shared_ptr<Combustion::VertexArray> m_VertexArray;
+	Combustion::Ref<Combustion::Shader> m_Shader;
+	Combustion::Ref<Combustion::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Combustion::Shader> m_BlueShader;
-	std::shared_ptr<Combustion::VertexArray> m_SquareVA;
+	Combustion::Ref<Combustion::Shader> m_FlatColorShader;
+	Combustion::Ref<Combustion::VertexArray> m_SquareVA;
+
+	Combustion::Ref<Combustion::Texture2D> m_Texture;
+
+	Combustion::Ref<Combustion::Shader> m_TextureShader;
 
 	Combustion::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
@@ -208,7 +244,7 @@ private:
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotateSpeed = 10.0f;
 
-	bool m_GoodMovement = true;
+	glm::vec3 m_SquareColor = { 0.2f, 0.3, 0.8f };
 };
 
 class Sandbox : public Combustion::Application {

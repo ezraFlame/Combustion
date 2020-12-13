@@ -21,6 +21,7 @@
 
 #include "Combustion/Renderer/Buffer.h"
 #include "Combustion/Renderer/Shader.h"
+#include "Combustion/Renderer/Texture.h"
 #include "Combustion/Renderer/VertexArray.h"
 
 #include "Combustion/Renderer/OrthographicCamera.h"

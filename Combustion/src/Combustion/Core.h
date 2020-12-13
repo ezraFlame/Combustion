@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef CB_PLATFORM_WINDOWS
 #ifdef HZ_DLL
 #ifdef CB_BUILD_DLL
@@ -25,3 +27,11 @@
 #define BIT(x) (1 << x)
 
 #define CB_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Combustion {
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}

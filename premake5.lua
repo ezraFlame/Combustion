@@ -15,6 +15,7 @@ IncludeDir["GLFW"] = "Combustion/vendor/GLFW/include"
 IncludeDir["Glad"] = "Combustion/vendor/Glad/include"
 IncludeDir["ImGui"] = "Combustion/vendor/imgui"
 IncludeDir["glm"] = "Combustion/vendor/glm"
+IncludeDir["stb_image"] = "Combustion/vendor/stb_image"
 
 include "Combustion/vendor/GLFW"
 include "Combustion/vendor/Glad" 
@@ -36,8 +37,14 @@ project "Combustion"
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/glm/glm/**.hpp",
-		"%{prj.name}/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp"
+	}
+
+	defines {
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs {
@@ -46,7 +53,8 @@ project "Combustion"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links {
@@ -54,10 +62,6 @@ project "Combustion"
 		"Glad",
 		"ImGui",
 		"opengl32.lib"
-	}
-
-	defines {
-		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	filter "system:windows"
